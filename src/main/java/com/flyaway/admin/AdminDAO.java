@@ -145,16 +145,6 @@ public class AdminDAO {
 		return fp;
 	}
 	
-	//INSERT
-	//public int insert(flightPojo fpojo){}
-	
-	
-	//DELETE
-	//public int delete(flightPojo fpojo){}
-	
-	
-	//UPDATE
-	//public int update(flightPojo fpojo){}
 	
 	
 	
