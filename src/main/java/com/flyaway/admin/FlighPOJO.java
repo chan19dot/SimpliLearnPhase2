@@ -37,8 +37,8 @@ public class FlighPOJO {
 	public Date getDateOfFlight() {
 		return dateOfFlight;
 	}
-	public void setDateOfFlight(Date dateOfFlight) {
-		this.dateOfFlight = dateOfFlight;
+	public void setDateOfFlight(Date date) {
+		this.dateOfFlight = date;
 	}
 	public double getPrice() {
 		return price;

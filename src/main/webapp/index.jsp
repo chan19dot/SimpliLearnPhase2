@@ -13,8 +13,7 @@
 <form action="adminlogin.jsp">
 <input type="submit" value="Admin Login" >
 </form>
-<form action="customerlogin.jsp">
-<input type="submit" value="Customer Login">
+
 </form>
 <form action="registration.jsp">
 <br>

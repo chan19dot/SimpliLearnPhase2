@@ -25,6 +25,7 @@ public class AdminDAO {
 			
 		}
 		con.close();
+		rs.close();
 		return 0;
 	}
 	
@@ -44,6 +45,7 @@ public class AdminDAO {
 		}
 		
 		con.close();
+		
 		return 0;
 	}
 	
@@ -61,6 +63,7 @@ public class AdminDAO {
 			l.add(obj);
 		}
 		con.close();
+		rs.close();
 		return l;
 		
 		
@@ -94,9 +97,53 @@ public class AdminDAO {
 			obj.setPrice(rs.getDouble(6));
 			info.add(obj);
 		}
+		con.close();
+		rs.close();
 		return info;
 	}
 	
+	public List<FlighPOJO> fetch(FlighPOJO fp) throws ClassNotFoundException, SQLException{
+		Connection con = AdminDbConnection.getConn();
+		List<FlighPOJO> pl = new ArrayList<FlighPOJO>();
+		String sql = "SELECT * FROM flightdetails WHERE sourcePlace=? AND destination = ? AND dateOfFlight=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, fp.getSource());
+		ps.setString(2,fp.getDestination());
+		ps.setDate(3, fp.getDateOfFlight());
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			FlighPOJO obj = new FlighPOJO();
+			obj.setId(rs.getInt(1));
+			obj.setAirline(rs.getString(2));
+			obj.setSource(rs.getString(3));
+			obj.setDestination(rs.getString(4));
+			obj.setDateOfFlight(rs.getDate(5));
+			obj.setPrice(rs.getDouble(6));
+			pl.add(obj);
+		}
+		
+		return pl;
+	}
+	
+	public FlighPOJO fetch1(String id) throws ClassNotFoundException, SQLException {
+		Connection con = AdminDbConnection.getConn();
+		FlighPOJO fp = new FlighPOJO();
+		String sql = "SELECT * FROM flightdetails WHERE ID=?";
+		PreparedStatement ps= con.prepareStatement(sql);
+		int Id = Integer.valueOf(id);
+		ps.setInt(1, Id);
+		ResultSet rs = ps.executeQuery();
+		while(rs.next()) {
+			fp.setId(rs.getInt(1));
+			fp.setAirline(rs.getString(2));
+			fp.setSource(rs.getString(3));
+			fp.setDestination(rs.getString(4));
+			fp.setDateOfFlight(rs.getDate(5));
+			fp.setPrice(rs.getDouble(6));
+			break;
+		}
+		return fp;
+	}
 	
 	//INSERT
 	//public int insert(flightPojo fpojo){}
@@ -111,8 +158,7 @@ public class AdminDAO {
 	
 	
 	
-	//RETRIEVE
-	//public int retrieve(flightPojo fpojo){}
+	
 	
 
 }
